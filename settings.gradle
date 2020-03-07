@@ -13,4 +13,4 @@ pluginManagement {
      }
 }
 
-rootProject.name = "bowlingapp"
+rootProject.name = "bowling-app"
