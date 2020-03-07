@@ -1,0 +1,40 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "de.msz.bowlingapp"
+    },
+    "jhipsterVersion": "6.7.1",
+    "applicationType": "monolith",
+    "baseName": "bowlingapp",
+    "packageName": "de.msz.bowlingapp",
+    "packageFolder": "de/msz/bowlingapp",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": false,
+    "websocket": false,
+    "databaseType": "no",
+    "devDatabaseType": "no",
+    "prodDatabaseType": "no",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "gradle",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "M2U5NzNmM2UxZmQ0ZTdiN2JmNzI2YThiMDZlZmQ1NWRiMWYzNTNjNjkzMzQwZmM4ODU4ZGQzNjdhMGU5MDNiY2Q3ZDE3NTJlMWI0YzAzOTUyOTQwZTZmMDgzNDc4ODYwODUzZjNhYWY2ZjU3MWNlZjM4Y2E3YmE1MmRjODU1Y2M=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "react",
+    "clientTheme": "spacelab",
+    "clientThemeVariant": "primary",
+    "creationTimestamp": 1583617207813,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "blueprints": []
+  }
+}
