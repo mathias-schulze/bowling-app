@@ -27,7 +27,7 @@ export const Events = (props: IEventsProp) => {
       eventsArray.push(props.events[key]);
     });
   const eventsList = eventsArray
-    .sort((a, b) => (a.datum < b.datum));
+    .sort((a, b) => (a.datum < b.datum ? 1 : -1));
   
   return (
     <Row>
