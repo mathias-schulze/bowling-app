@@ -30,6 +30,7 @@ import { faRoad } from '@fortawesome/free-solid-svg-icons/faRoad';
 import { faCloud } from '@fortawesome/free-solid-svg-icons/faCloud';
 import { faUsers } from '@fortawesome/free-solid-svg-icons/faUsers';
 import { faTools } from '@fortawesome/free-solid-svg-icons/faTools';
+import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons/faCalendarAlt';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 
@@ -66,6 +67,7 @@ export const loadIcons = () => {
     faTimesCircle,
     faSearch,
     faUsers,
-    faTools
+    faTools,
+    faCalendarAlt
   );
 };

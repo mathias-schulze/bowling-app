@@ -28,6 +28,14 @@ export const Home = props => (
   </NavItem>
 );
 
+export const EventsButton = props => (
+  <NavItem>
+    <NavLink tag={Link} to="/events" className="d-flex align-items-center">
+      <FontAwesomeIcon icon="calendar-alt" />
+    </NavLink>
+  </NavItem>
+);
+
 export const PlayersButton = props => (
   <NavItem>
     <NavLink tag={Link} to="/players" className="d-flex align-items-center">

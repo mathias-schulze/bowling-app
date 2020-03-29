@@ -12,22 +12,22 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
 import { IRootState } from 'app/shared/reducers';
-import { getPlayers } from './players.reducer';
+import { getEvents } from './events.reducer';
 
-export interface IPlayersProp extends StateProps, DispatchProps {}
+export interface IEventsProp extends StateProps, DispatchProps {}
 
-export const Players = (props: IPlayersProp) => {
+export const Events = (props: IEventsProp) => {
   
   useEffect(() => {
-    props.getPlayers();
+    props.getEvents();
   }, []);
   
-  const playersArray = [];
-  Object.keys(props.players).forEach(function(key) {
-      playersArray.push(props.players[key]);
+  const eventsArray = [];
+  Object.keys(props.events).forEach(function(key) {
+      eventsArray.push(props.events[key]);
     });
-  const playersList = playersArray
-    .sort((a, b) => (a.name.localeCompare(b.name)));
+  const eventsList = eventsArray
+    .sort((a, b) => (a.datum < b.datum));
   
   return (
     <Row>
@@ -36,14 +36,18 @@ export const Players = (props: IPlayersProp) => {
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Name</TableCell>
+                <TableCell>Datum</TableCell>
+                <TableCell>Beschreibung</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {playersList.map((player) => (
-                <TableRow key={player.key}>
+              {eventsList.map((event) => (
+                <TableRow key={event.key}>
                   <TableCell component="th" scope="row">
-                    {player.name}
+                    {event.datum}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {event.beschreibung}
                   </TableCell>
                 </TableRow>
               ))}
@@ -55,14 +59,14 @@ export const Players = (props: IPlayersProp) => {
   );
 };
 
-const mapStateToProps = ({ players }: IRootState) => ({
-  players: players.players,
-  isFetching: players.loading
+const mapStateToProps = ({ events }: IRootState) => ({
+  events: events.events,
+  isFetching: events.loading
 });
 
-const mapDispatchToProps = { getPlayers };
+const mapDispatchToProps = { getEvents };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
 
-export default connect(mapStateToProps, mapDispatchToProps)(Players);
+export default connect(mapStateToProps, mapDispatchToProps)(Events);
