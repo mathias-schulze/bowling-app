@@ -9,10 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Event {
+public class Result {
 
-	private String id;
-	private String beschreibung;
-	private String datum;
-	private List<Player> players;
+	private Event event;
+	private List<PlayerResult> playerResults;
 }

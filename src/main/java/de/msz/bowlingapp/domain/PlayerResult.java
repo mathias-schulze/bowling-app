@@ -1,5 +1,6 @@
 package de.msz.bowlingapp.domain;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -9,10 +10,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Event {
+public class PlayerResult {
 
-	private String id;
-	private String beschreibung;
-	private String datum;
-	private List<Player> players;
+	private Player player;
+	private List<Game> games;
+	private int noGames;
+	private int sum;
+	private BigDecimal avg;
 }

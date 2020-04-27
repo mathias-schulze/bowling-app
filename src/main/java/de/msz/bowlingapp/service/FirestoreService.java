@@ -21,6 +21,7 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import de.msz.bowlingapp.domain.Event;
 import de.msz.bowlingapp.domain.Game;
@@ -34,6 +35,7 @@ public class FirestoreService {
     private Map<String, Player> players = new HashMap<>();
 
     private Map<String, Event> events = new HashMap<>();
+    private Event lastEvent;
 
     private Map<String, Game> games = new HashMap<>();
 
@@ -43,6 +45,10 @@ public class FirestoreService {
 	
 	public Map<String, Event> getEvents() {
 		return Collections.unmodifiableMap(events);
+	}
+	
+	public Event getLastEvent() {
+		return lastEvent;
 	}
 	
 	public Map<String, Game> getGames() {
@@ -138,6 +144,30 @@ public class FirestoreService {
 				Event event = snapshot.getValue(Event.class);
 				event.setId(snapshot.getKey());
 				events.put(event.getId(), event);
+				
+				snapshot.getChildren().forEach(eventChild -> {
+					if (eventChild.getKey().equals("spieler")) {
+						eventChild.getChildren().forEach(p -> {
+							event.getPlayers().add(players.get(p.getKey()));
+						});
+					}
+				});
+				
+				db.getReference("aktuellerTermin").addListenerForSingleValueEvent(new ValueEventListener() {
+					
+					@Override
+					public void onDataChange(DataSnapshot snapshot) {
+						// TODO Auto-generated method stub
+						String id = (String) snapshot.getValue();
+						lastEvent = events.get(id);
+					}
+					
+					@Override
+					public void onCancelled(DatabaseError error) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
 			}
 			
 			@Override
