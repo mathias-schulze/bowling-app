@@ -35,6 +35,7 @@ public class FirestoreService {
     private Map<String, Player> players = new HashMap<>();
 
     private Map<String, Event> events = new HashMap<>();
+    private String lastEventId;
     private Event lastEvent;
 
     private Map<String, Game> games = new HashMap<>();
@@ -48,6 +49,11 @@ public class FirestoreService {
 	}
 	
 	public Event getLastEvent() {
+		
+		if (lastEvent == null) {
+			lastEvent = events.get(lastEventId);
+		}
+		
 		return lastEvent;
 	}
 	
@@ -60,6 +66,7 @@ public class FirestoreService {
 		db = getFirebaseDatabase();
 		initPlayers();
 		initEvents();
+		initLastEvent();
 		initGames();
 	}
 
@@ -120,7 +127,7 @@ public class FirestoreService {
 	}
 
 	private void initEvents() {
-
+		
 		db.getReference("termin").addChildEventListener(new ChildEventListener() {
 			
 			@Override
@@ -148,24 +155,8 @@ public class FirestoreService {
 				snapshot.getChildren().forEach(eventChild -> {
 					if (eventChild.getKey().equals("spieler")) {
 						eventChild.getChildren().forEach(p -> {
-							event.getPlayers().add(players.get(p.getKey()));
+							event.getPlayers().add(p.getKey());
 						});
-					}
-				});
-				
-				db.getReference("aktuellerTermin").addListenerForSingleValueEvent(new ValueEventListener() {
-					
-					@Override
-					public void onDataChange(DataSnapshot snapshot) {
-						// TODO Auto-generated method stub
-						String id = (String) snapshot.getValue();
-						lastEvent = events.get(id);
-					}
-					
-					@Override
-					public void onCancelled(DatabaseError error) {
-						// TODO Auto-generated method stub
-						
 					}
 				});
 			}
@@ -176,7 +167,26 @@ public class FirestoreService {
 			}
 		});
 	}
+	
+	private void initLastEvent() {
+		
+		db.getReference("aktuellerTermin").addListenerForSingleValueEvent(new ValueEventListener() {
+			
+			@Override
+			public void onDataChange(DataSnapshot snapshot) {
+				// TODO Auto-generated method stub
+				lastEventId = (String) snapshot.getValue();
+			}
+			
+			@Override
+			public void onCancelled(DatabaseError error) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 
+	}
+	
 	private void initGames() {
 
 		db.getReference("spiel").addChildEventListener(new ChildEventListener() {
